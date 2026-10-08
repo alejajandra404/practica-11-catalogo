@@ -175,7 +175,7 @@ export class TarjetaProducto
                             bubbles: true,
 
                             // Permite que salga del Shadow DOM
-                            // composed: true,
+                            composed: true,
                         },
                     ),
                 );

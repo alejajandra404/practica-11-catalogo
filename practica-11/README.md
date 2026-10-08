@@ -27,19 +27,17 @@ Aunque en `main.ts` yo mande el precio y la existencia como números, cuando la 
 
 **Si el evento no puede salir del árbol de sombra, el contador no se mueve y no hay ningún error**
 
-Cada tarjeta tiene su propio árbol de sombra (Shadow DOM), que es como una cajita cerrada. Cuando le doy clic al botón, la tarjeta avisa con un evento propio llamado `agregar`, pero ese evento se queda atrapado dentro de la cajita a menos que le diga que puede salir. Para eso le puse `bubbles: true` y `composed: true`:
+Cuando presiono el botón, la tarjeta avisa con un evento llamado `agregar`, y el contenedor de las tarjetas lo escucha para subir el contador. Al crear el evento le puse `bubbles: true` y `composed: true`.
 
-- `bubbles` hace que el evento suba por los elementos, de la tarjeta hasta el contenedor.
-- `composed` hace que pueda atravesar la pared de la sombra.
+Probé quitando cada uno:
 
-Si le quito `composed: true`, el contador deja de subir cuando presiono el botón y la consola no muestra ningún error, simplemente no pasa nada. Eso lo hace difícil de detectar, porque no hay ningún mensaje que te diga qué está mal.
-
-Gracias a que el evento sí sale, en `main.ts` basta con **un solo** listener en el contenedor de las tarjetas para escuchar las doce, en lugar de uno por tarjeta.
+- **Sin `composed`:** el contador siguió subiendo y no hubo ningún error. Creo que es porque la tarjeta manda el evento desde ella misma.
+- **Sin `bubbles`:** el contador se quedó en cero y tampoco salió ningún error en la consola entonces puede ser difícil encontrar que falla.
 
 ## Evidencias
 
 En la carpeta `evidencias/` están las capturas de:
 
-- El botón en sus variantes.
-- El catálogo con las tarjetas agotadas.
-- El contador después de agregar productos.
+- `variantes.png`: el botón en sus variantes.
+- `agotadas.png`: el catálogo con las tarjetas agotadas.
+- `contador.png`: el contador después de agregar productos.
