@@ -59,6 +59,15 @@
         <section class="rejilla" id="rejilla">
         </section>
 
+        <!-- Aquí main.ts muestra lo que hay en el carrito -->
+        <section class="tarea">
+            <h2>
+                Carrito
+            </h2>
+
+            <tabla-generica id="tabla-carrito"></tabla-generica>
+        </section>
+
         <!-- Esta sección sirve para probar las variantes -->
         <section class="tarea" id="tarea">
 
@@ -83,6 +92,24 @@
                 <boton-app variante="primario" deshabilitado>
                     Deshabilitado
                 </boton-app>
+
+            </div>
+        </section>
+
+        <!-- Esta sección sirve para probar los estados de la insignia -->
+        <section class="tarea">
+
+            <h2>
+                Estados de la insignia
+            </h2>
+
+            <div class="variantes-botones">
+
+                <insignia-estado estado="disponible"></insignia-estado>
+
+                <insignia-estado estado="pocas-piezas"></insignia-estado>
+
+                <insignia-estado estado="agotado"></insignia-estado>
 
             </div>
         </section>

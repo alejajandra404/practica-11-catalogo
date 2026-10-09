@@ -1,0 +1,29 @@
+/* la etiqueta <insignia-estado> se comporta como un elemento en línea */
+:host {
+    display: inline-block;
+}
+
+/* forma general de la insignia */
+span {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* un color para cada estado */
+.disponible {
+    background: #dcfce7;
+    color: var(--color-verde, #2e9e5b);
+}
+
+.pocas-piezas {
+    background: #fef3c7;
+    color: #b45309;
+}
+
+.agotado {
+    background: #fee2e2;
+    color: var(--color-rojo, #ff4757);
+}

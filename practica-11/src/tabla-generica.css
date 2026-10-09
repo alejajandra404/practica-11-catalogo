@@ -1,0 +1,43 @@
+/* la etiqueta <tabla-generica> se comporta como un bloque */
+:host {
+    display: block;
+}
+
+/* tabla completa */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border: 1px solid var(--color-linea, #e5e7eb);
+    border-radius: var(--radio, 12px);
+    overflow: hidden;
+}
+
+/* encabezado */
+th {
+    text-align: left;
+    padding: 12px 16px;
+    font-size: 14px;
+    color: var(--color-tinta, #111827);
+    background: var(--color-fondo, #f7f8fc);
+    border-bottom: 1px solid var(--color-linea, #e5e7eb);
+}
+
+/* celdas de datos */
+td {
+    padding: 12px 16px;
+    font-size: 15px;
+    color: var(--color-texto, #374151);
+    border-bottom: 1px solid var(--color-linea, #e5e7eb);
+}
+
+/* la última fila no necesita línea abajo */
+tr:last-child td {
+    border-bottom: none;
+}
+
+/* mensaje cuando no hay filas */
+.vacio {
+    text-align: center;
+    color: var(--color-tenue, #6b7280);
+}

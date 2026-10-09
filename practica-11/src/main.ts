@@ -1,5 +1,8 @@
 import './tarjeta-producto';
-import type { Producto } from './tipos';
+import './tabla-generica';
+import './insignia-estado';
+import type { TablaGenerica } from './tabla-generica';
+import type { ItemCarrito, Producto } from './tipos';
 
 const rejilla = document.querySelector<HTMLElement>('#rejilla')!;
 
@@ -37,15 +40,57 @@ const cuenta = document.querySelector<HTMLElement>('#cuenta')!;
 const vaciar = document.querySelector<HTMLElement>('#vaciar')!;
 let enCarrito = 0;
 
-// UN solo listener para las doce tarjetas: el evento sube hasta la rejilla.
+// asignación 3: la tabla que muestra lo que hay en el carrito
+const tabla = document.querySelector<TablaGenerica>('#tabla-carrito')!;
+
+// las columnas dicen que dato sacar de cada objeto (clave)
+// y que texto mostrar en el encabezado (titulo)
+tabla.columnas = [
+    { clave: 'producto', titulo: 'Producto' },
+    { clave: 'precio', titulo: 'Precio' },
+    { clave: 'cantidad', titulo: 'Cantidad' },
+];
+
+// aquí se guardar los productos del carrito
+const carrito: ItemCarrito[] = [];
+
+// al empezar el carrito está vacío, así que la tabla dice «Sin datos»
+tabla.filas = carrito;
+
+// UN solo listener para las doce tarjetas 
 rejilla.addEventListener('agregar', (e) => {
     enCarrito++;
     cuenta.textContent = String(enCarrito);
     console.log('Agregado:', e.detail.nombre, e.detail.precio);
+
+    // buscar si el producto ya estaba en el carrito
+    const existente = carrito.find((item) => item.id === e.detail.id);
+
+    if (existente) {
+        // si ya estaba solo se suma una pieza
+        existente.cantidad++;
+    } else {
+        // si no estaba lo se agrega con cantidad 1
+        carrito.push({
+            id: e.detail.id,
+            producto: e.detail.nombre,
+            precio: e.detail.precio,
+            cantidad: 1,
+        });
+    }
+
+    // asignar las filas para que la tabla se redibuje
+    tabla.filas = carrito;
 });
 
 // El mismo <boton-app> del encabezado, con otro uso.
 vaciar.addEventListener('click', () => {
     enCarrito = 0;
     cuenta.textContent = '0';
+
+    // vaciar el arreglo sin cambiarlo por otro
+    carrito.length = 0;
+
+    // la tabla vuelve a decir «Sin datos»
+    tabla.filas = carrito;
 });

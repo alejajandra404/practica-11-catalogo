@@ -41,3 +41,41 @@ En la carpeta `evidencias/` están las capturas de:
 - `variantes.png`: el botón en sus variantes.
 - `agotadas.png`: el catálogo con las tarjetas agotadas.
 - `contador.png`: el contador después de agregar productos.
+
+---
+
+# Asignación 3 – Tabla genérica y un componente más
+
+Se trabajó sobre el mismo catálogo de la práctica 11. Los dos componentes nuevos se usan en la misma página.
+
+## Parte A: la tabla genérica
+
+La tabla es el componente `<tabla-generica>` (`src/tabla-generica.ts` y `src/tabla-generica.css`). Recibe las `columnas` (la clave del dato y el título que se muestra) y las `filas` (una lista de objetos) como propiedades, porque son arreglos y un atributo solo guarda texto. Cada vez que se le asignan, la tabla se dibuja otra vez. Si no hay filas muestra «Sin datos».
+
+En el catálogo la uso para mostrar el carrito (producto, precio y cantidad). Se actualiza con cada «Agregar» y con «Vaciar». Si agrego el mismo producto dos veces, no crea otra fila, solo le sube la cantidad.
+
+**¿Por qué esta tabla se puede llamar «genérica»?**
+
+Porque la tabla no sabe qué datos está mostrando. En su código nunca aparece la palabra «producto» ni «precio»: solo recorre las columnas que le mandan y para cada una busca en cada objeto el dato que tiene esa clave. 
+
+**¿Qué tendría que cambiar para mostrar alumnos en lugar de productos?**
+
+Nada del componente. Solo tendría que mandarle otras columnas y otras filas. Por ejemplo, columnas como `{ clave: 'nombre', titulo: 'Nombre' }` y `{ clave: 'carrera', titulo: 'Carrera' }`, y filas con objetos de alumnos. El archivo de la tabla se queda igual.
+
+## Parte B: la insignia de estado
+
+Escogí la insignia de estado: el componente `<insignia-estado>` (`src/insignia-estado.ts` y `src/insignia-estado.css`). Muestra una pastilla que cambia de color y de texto según el estado: `disponible` (verde), `pocas-piezas` (amarillo) y `agotado` (rojo). Está en la página en la sección «Estados de la insignia».
+
+**Contrato del componente**
+
+- **Qué recibe:** el atributo `estado`, que puede ser `disponible`, `pocas-piezas` o `agotado`. Es el atributo que el componente "vigila" si lo cambio en el HTML, la insignia cambia sola de color y de texto. Si le pongo un estado que no existe, muestra `disponible`.
+- **Qué avisa:** nada porque la insignia es la excepción y no necesita un evento propio porque solo muestra información y no tiene nada que avisar.
+- **Qué guarda adentro:** su propio Shadow DOM, con un `<span>` y sus estilos, y el objeto con el texto que va con cada estado.
+
+## Evidencias de la asignación 3
+
+En la carpeta `evidencias/asignacion-03/` están las capturas de:
+
+- `tabla-vacia.png`: la tabla diciendo «Sin datos».
+- `tabla-carrito.png`: la tabla con productos en el carrito.
+- `insignia-estados.png`: la insignia en sus tres estados.
